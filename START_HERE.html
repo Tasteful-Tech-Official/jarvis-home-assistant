@@ -1,0 +1,58 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Free adaptable JARVIS-style Home Assistant build tutorial, prompts and commands. Back up before making changes."><title>JARVIS-style local AI voice assistant: viewer quick start | JARVIS Guide</title><link rel="stylesheet" href="assets/site.css"><script defer src="assets/site.js"></script></head><body><main><nav class="header-nav" aria-label="Main navigation"><a href="index.html" class="eyebrow">J.A.R.V.I.S. / FREE BUILD GUIDE</a><div class="nav-links"><a href="START_HERE.html">Getting started</a><a href="docs/COPY_PASTE_COMMANDS.html">Commands</a><a href="prompts/07-full-dashboard-build.html">Build prompt</a><a href="prompts/08-full-home-context-web-search.html">Search prompt</a></div></nav><article class="doc"><div class="eyebrow">JARVIS / REFERENCE RESOURCE</div><aside class="notice" role="note"><strong>Back up your files — use at your own risk.</strong><p>Before running commands or asking an AI to change Home Assistant, back up your Home Assistant configuration, dashboards and important files. I am not responsible for damage or data loss. Proceed at your own risk. AI prompts can produce different or inaccurate results depending on your setup. Read, verify and approve all changes, especially device and heating controls.</p></aside><h1>JARVIS-style local AI voice assistant: viewer quick start</h1>
+<p><strong>Important — back up first.</strong> Back up Home Assistant, dashboards and important files. I am not responsible for damage or data loss; proceed at your own risk. AI-generated prompts and actions can vary in accuracy and outcome. Review all changes before accepting them.</p>
+<p><strong>This is a starter kit, not a one-click Home Assistant configuration.</strong> It is intentionally missing entity IDs, credentials, thermostat automations, and network addresses. Every Home Assistant environment is different.</p>
+<h2>What you need</h2>
+<ul>
+<li>A computer capable of running your chosen local AI services; the video used an M1 Pro MacBook Pro with 16 GB, but your system may differ.</li>
+<li>A working Home Assistant instance, ideally backed up before changes.</li>
+<li>Ollama on the Mac, with a small tool-capable model.</li>
+<li>Speech recognition and speech generation connected through Wyoming, or comparable providers.</li>
+<li>A compatible microphone/speaker and an Assist pipeline.</li>
+<li><strong>Voice used in the video:</strong> Piper Alan Medium, British English (<code>en_GB-alan-medium</code>). You may select another voice if preferred.</li>
+</ul>
+<h2>Stage-by-stage route</h2>
+<ol>
+<li><strong>Check existing Home Assistant installation</strong>. Make a backup; identify the local HA and Mac IPs.</li>
+<li><strong>Install Ollama</strong> natively on macOS and verify <code>curl http://127.0.0.1:11434/api/tags</code> works.</li>
+<li><strong>Connect Home Assistant to Ollama</strong>. Add a conversation agent; use Device control, not unrestricted admin tools.</li>
+<li><strong>Set up Wyoming speech services</strong>. MLX Whisper uses port 10300, Piper uses port 10200 in the example build. Check running processes and connect both services in Devices &amp; services.</li>
+<li><strong>Create an Assist pipeline</strong>. Choose MLX Whisper -&gt; Ollama -&gt; Piper; test text before voice.</li>
+<li><strong>Expose only approved entities</strong>. Configure names, areas and aliases; test one harmless light.</li>
+<li><strong>Optional Mac wake word</strong>. Install and test the third-party browser card; read its instructions and security caveats. A dashboard card is not the same as a guaranteed always-on native voice satellite.</li>
+<li><strong>Optional refinements</strong>. Personality, dashboard, live web search via Home Assistant MCP Client, and experimental barge-in.</li>
+</ol>
+<h2>Main prompts used in the video (adapted for public use)</h2>
+<ol>
+<li><strong><a href="prompts/07-full-dashboard-build.txt">Build the JARVIS command centre</a></strong> — full design and Voice Satellite Card instructions.</li>
+<li><strong><a href="prompts/08-full-home-context-web-search.txt">Upgrade smart-home context and add internet search</a></strong> — full home mapping and MCP search instructions.</li>
+</ol>
+<p>Unlike the creator-specific originals, these ask the AI to identify <strong>your</strong> hardware, Home Assistant instance, entities and services before changing anything.</p>
+<h2>Other optional prompts</h2>
+<ul>
+<li><code>prompts/01-personality.md</code>: JARVIS persona.</li>
+<li><code>prompts/02-smart-home-context.md</code>: read-only device inventory, safe thermostat mapping.</li>
+<li><code>prompts/03-dashboard.md</code>: safe visual dashboard improvements.</li>
+<li><code>prompts/04-internet-search.md</code>: MCP and search provider investigation.</li>
+<li><code>prompts/05-voice-interruption.md</code>: experimental barge-in investigation.</li>
+<li><code>prompts/06-original-setup-review.md</code>: audit without reinstalling.</li>
+</ul>
+<h2>Important boundaries</h2>
+<ul>
+<li>Never copy someone else's thermostat IDs or network addresses.</li>
+<li>Do not paste private tokens, credentials, backups or Home Assistant <code>.storage</code> files into public repositories.</li>
+<li>Never expose Ollama, Wyoming or MCP service ports directly to the public internet.</li>
+<li>Web search is an online operation even when the language model itself runs locally.</li>
+<li>A community card, wake word and full barge-in are not identical to supported first-party Home Assistant voice hardware.</li>
+</ul>
+<h2>Helpful documentation</h2>
+<ul>
+<li><a href="https://www.home-assistant.io/integrations/ollama/">https://www.home-assistant.io/integrations/ollama/</a></li>
+<li><a href="https://www.home-assistant.io/integrations/wyoming/">https://www.home-assistant.io/integrations/wyoming/</a></li>
+<li><a href="https://github.com/basnijholt/wyoming-mlx-whisper">https://github.com/basnijholt/wyoming-mlx-whisper</a></li>
+<li><a href="https://github.com/OHF-Voice/wyoming-piper">https://github.com/OHF-Voice/wyoming-piper</a></li>
+<li><a href="https://www.home-assistant.io/voice_control/aliases/">https://www.home-assistant.io/voice_control/aliases/</a></li>
+<li><a href="https://www.home-assistant.io/voice_control/voice_remote_expose_devices/">https://www.home-assistant.io/voice_control/voice_remote_expose_devices/</a></li>
+<li><a href="https://github.com/emme99/voice-satellite-card">https://github.com/emme99/voice-satellite-card</a></li>
+<li><a href="https://www.home-assistant.io/integrations/mcp/">https://www.home-assistant.io/integrations/mcp/</a></li>
+</ul>
+</article><footer class="foot">Independent DIY guide. Not affiliated with Home Assistant, Apple or Marvel. The filmed build used Piper Alan Medium (en_GB-alan-medium). Always verify current upstream instructions and your own setup.</footer></main></body></html>

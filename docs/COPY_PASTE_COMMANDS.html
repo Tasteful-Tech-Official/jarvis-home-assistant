@@ -1,0 +1,48 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Free adaptable JARVIS-style Home Assistant build tutorial, prompts and commands. Back up before making changes."><title>Mac Terminal commands (copy and adapt) | JARVIS Guide</title><link rel="stylesheet" href="../assets/site.css"><script defer src="../assets/site.js"></script></head><body><main><nav class="header-nav" aria-label="Main navigation"><a href="../index.html" class="eyebrow">J.A.R.V.I.S. / FREE BUILD GUIDE</a><div class="nav-links"><a href="../START_HERE.html">Getting started</a><a href="../docs/COPY_PASTE_COMMANDS.html">Commands</a><a href="../prompts/07-full-dashboard-build.html">Build prompt</a><a href="../prompts/08-full-home-context-web-search.html">Search prompt</a></div></nav><article class="doc"><div class="eyebrow">JARVIS / REFERENCE RESOURCE</div><aside class="notice" role="note"><strong>Back up your files — use at your own risk.</strong><p>Before running commands or asking an AI to change Home Assistant, back up your Home Assistant configuration, dashboards and important files. I am not responsible for damage or data loss. Proceed at your own risk. AI prompts can produce different or inaccurate results depending on your setup. Read, verify and approve all changes, especially device and heating controls.</p></aside><h1>Mac Terminal commands (copy and adapt)</h1>
+<p><strong>Back up Home Assistant, dashboards and important files first. The creator is not responsible for damage or data loss; proceed at your own risk. AI-generated installation instructions can vary.</strong></p>
+<p><strong>Examples, not a one-click install.</strong> Check current upstream documentation and replace placeholders with your actual values. Run these commands on the Mac, not in the Home Assistant Terminal. Do not paste a literal <code>YOUR_MAC_LAN_IP</code> into a command.</p>
+<h2>Confirm the Mac and Ollama</h2>
+<div class="actions"><button class="button" data-copy="block-8346906">Copy</button></div><pre id="block-8346906"><code>uname -m
+sw_vers
+ollama --version
+ollama list
+</code></pre>
+<h2>Ollama model and API</h2>
+<div class="actions"><button class="button" data-copy="block-2165746">Copy</button></div><pre id="block-2165746"><code>ollama pull qwen3:4b-instruct
+ollama run qwen3:4b-instruct &quot;Say hello briefly.&quot;
+curl http://127.0.0.1:11434/api/tags
+ollama ps
+</code></pre>
+<p>To make the <strong>macOS Ollama app</strong> listen on the trusted LAN, then fully quit and reopen the Ollama app:</p>
+<div class="actions"><button class="button" data-copy="block-100695">Copy</button></div><pre id="block-100695"><code>launchctl setenv OLLAMA_HOST &quot;0.0.0.0:11434&quot;
+</code></pre>
+<p>Test from another trusted machine at <code>http://YOUR_MAC_LAN_IP:11434/api/tags</code>. Do <strong>not</strong> forward port 11434 to the public internet. Verify service startup after a reboot separately.</p>
+<h2>MLX Whisper (speech-to-text)</h2>
+<p>Install <code>uv</code> if needed: <a href="https://docs.astral.sh/uv/getting-started/installation/">https://docs.astral.sh/uv/getting-started/installation/</a></p>
+<div class="actions"><button class="button" data-copy="block-3749779">Copy</button></div><pre id="block-3749779"><code>uv --version
+uvx --python 3.12 wyoming-mlx-whisper \
+  --uri tcp://0.0.0.0:10300 \
+  --model mlx-community/whisper-small-mlx \
+  --language en
+</code></pre>
+<p>Keep this Terminal session running while testing. Add a Home Assistant <strong>Wyoming Protocol</strong> integration to <code>YOUR_MAC_LAN_IP</code>, port <code>10300</code>.</p>
+<h2>Piper (text-to-speech)</h2>
+<div class="actions"><button class="button" data-copy="block-7787785">Copy</button></div><pre id="block-7787785"><code>mkdir -p &quot;$HOME/ha-voice/piper&quot;
+uvx --python 3.12 --from wyoming-piper wyoming-piper \
+  --voice en_GB-alan-medium \
+  --uri tcp://0.0.0.0:10200 \
+  --data-dir &quot;$HOME/ha-voice/piper&quot; \
+  --download-dir &quot;$HOME/ha-voice/piper&quot;
+</code></pre>
+<p>Keep this Terminal session running while testing. Add a <strong>separate Wyoming Protocol</strong> integration to <code>YOUR_MAC_LAN_IP</code>, port <code>10200</code>. In Home Assistant, choose <strong>British English → Alan (medium)</strong>. This is the voice used in the video; you can choose a different available voice for your setup.</p>
+<h2>Diagnostic checks</h2>
+<div class="actions"><button class="button" data-copy="block-5262063">Copy</button></div><pre id="block-5262063"><code>pgrep -fl 'wyoming.*whisper|wyoming.*piper'
+lsof -nP -iTCP:10300 -sTCP:LISTEN
+lsof -nP -iTCP:10200 -sTCP:LISTEN
+</code></pre>
+<h2>Optional browser wake-word card</h2>
+<p>Follow the third-party project's actual installation guide: <a href="https://github.com/emme99/voice-satellite-card">https://github.com/emme99/voice-satellite-card</a> . Register its Lovelace JavaScript resource and then use the example in <code>examples/voice-satellite-card.example.yaml</code>.</p>
+<p>Remember: a browser typically needs HTTPS or localhost to access the microphone. The dashboard tab must remain active and the Mac awake. Do not disable browser security globally.</p>
+<h2>Optional web search</h2>
+<p>Home Assistant's <strong>Model Context Protocol Client</strong> requires a compatible network-accessible MCP server and the tool set must be explicitly enabled for the Ollama conversation agent. There is no safe universal installation command: inspect and approve the specific MCP server, permissions, ports, and privacy implications first.</p>
+</article><footer class="foot">Independent DIY guide. Not affiliated with Home Assistant, Apple or Marvel. The filmed build used Piper Alan Medium (en_GB-alan-medium). Always verify current upstream instructions and your own setup.</footer></main></body></html>

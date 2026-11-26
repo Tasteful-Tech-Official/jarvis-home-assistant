@@ -1,0 +1,8 @@
+# EXAMPLE ONLY - not a complete dashboard or a one-click install.
+# Requires https://github.com/emme99/voice-satellite-card
+# Requires a trusted browser origin (HTTPS or localhost) for microphone access.
+# Use an existing working Assist pipeline, or set pipeline: to its real ID.
+type: custom:voice-satellite-card
+wake_word: hey_jarvis
+mode: both
+style: fab

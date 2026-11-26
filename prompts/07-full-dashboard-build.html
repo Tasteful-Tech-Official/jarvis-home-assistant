@@ -1,0 +1,239 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Free adaptable JARVIS-style Home Assistant build tutorial, prompts and commands. Back up before making changes."><title>Prompt 1 — Build the JARVIS Command Centre | JARVIS Guide</title><link rel="stylesheet" href="../assets/site.css"><script defer src="../assets/site.js"></script></head><body><main><nav class="header-nav" aria-label="Main navigation"><a href="../index.html" class="eyebrow">J.A.R.V.I.S. / FREE BUILD GUIDE</a><div class="nav-links"><a href="../START_HERE.html">Getting started</a><a href="../docs/COPY_PASTE_COMMANDS.html">Commands</a><a href="../prompts/07-full-dashboard-build.html">Build prompt</a><a href="../prompts/08-full-home-context-web-search.html">Search prompt</a></div></nav><article class="doc"><div class="eyebrow">DASHBOARD DESIGN + WAKE-WORD CARD</div><h1>Prompt 1 — Build the JARVIS Command Centre</h1><p class="lead">Build a cinematic but functional Home Assistant command centre around your own existing entities. The public edition inspects your actual hardware and Home Assistant setup rather than assuming the creator&#x27;s Mac.</p><aside class="notice" role="note"><strong>Back up your files — use at your own risk.</strong><p>Before running commands or asking an AI to change Home Assistant, back up your Home Assistant configuration, dashboards and important files. I am not responsible for damage or data loss. Proceed at your own risk. AI prompts can produce different or inaccurate results depending on your setup. Read, verify and approve all changes, especially device and heating controls.</p></aside><p><strong>How to use:</strong> Copy this full prompt into ChatGPT Work or another assistant that can access your own Home Assistant. It should inspect first and ask approval before modifying your configuration. This version is adapted from the video prompt for public reuse.</p><div class="actions"><button type="button" class="cta" data-copy="full-prompt">Copy entire prompt</button><a class="button" href="07-full-dashboard-build.txt" download>Download as text</a><a class="button" href="../index.html">All resources</a></div><section class="prompt-shell"><div class="kicker">FULL COPY-READY PROMPT</div><pre id="full-prompt">PUBLIC TEMPLATE — adapted from the creator&#x27;s original prompts. This is NOT a one-click installation. Before proceeding, back up Home Assistant, dashboards and relevant files. Review the changes proposed by the AI; results vary by model, software, hardware, entities and permissions. I am not responsible for damage or data loss; proceed at your own risk. Do not give an AI permission to modify climate/security devices without reviewing and approving the exact actions.
+
+JARVIS BUILD PROMPTS
+PROJECT: Build My JARVIS AI Command Centre in Home Assistant
+I want you to use my computer and existing Home Assistant installation to create a stunning, futuristic JARVIS AI Command Centre dashboard, inspired by the sophisticated interfaces in Iron Man.
+I want a JARVIS-style local AI assistant dashboard, adapted to my actual hardware and Home Assistant environment.
+Please implement the dashboard in Home Assistant, not just design a mockup or provide sample YAML. Use the available computer tools, browser and file access. Preserve my working system.
+1. My existing setup
+Hardware
+	•	Inspect my actual computer, operating system, available RAM and audio hardware before making design or service decisions.
+	•	Do not assume Apple Silicon, a particular amount of RAM, or a built-in microphone.
+	•	Use existing supported speech services, microphone and speakers if available.
+Home Assistant
+	•	Use my actual, signed-in Home Assistant instance; confirm its real address, access and dashboard setup.
+	•	Do not assume any IP address, port, dashboard name or entity IDs.
+	•	Prefer a separate JARVIS demo dashboard; do not overwrite an existing dashboard unless I explicitly approve that change.
+	•	Back up the target dashboard before editing.
+Existing voice assistant — inspect what is actually installed
+	•	Identify the active language model and where it runs (for example, local Ollama).
+	•	Identify the active speech-to-text provider (MLX Whisper on supported Apple Silicon, or another service).
+	•	Identify the active text-to-speech provider (for example, Piper).
+	•	Identify the Home Assistant Assist pipeline and available tools.
+	•	Identify the active wake-word solution; the Voice Satellite Custom Card is one possible option.
+The Voice Satellite Card project is:
+https://github.com/emme99/voice-satellite-card
+Preserve existing working AI services. Do not reinstall or replace them. If key prerequisites are missing, explain what is needed and get my approval before proceeding.
+2. Overall design direction
+I want the dashboard to feel like a believable, high-end AI command centre.
+Visual inspiration:
+	•	Iron Man&#x27;s JARVIS interface
+	•	Futuristic holographic computer interfaces
+	•	Premium sci-fi operating systems
+	•	Minimal, beautifully organised smart-home dashboards
+Design language
+	•	Very dark navy/black background: #070D18
+	•	Electric cyan highlights: #00D9FF
+	•	Subtle deep-blue surfaces and borders
+	•	White and muted-grey text
+	•	Restrained glow effects
+	•	Fine technical details and subtle animations
+	•	Clean, modern typography
+	•	Rounded corners and elegant spacing
+The design should look expensive, polished and cinematic, not like a cheap gaming RGB theme.
+Avoid:
+	•	Excessive neon
+	•	Unreadable text
+	•	Huge empty panels
+	•	Generic weather widgets dominating the screen
+	•	Fake data
+	•	Unnecessary decorative gauges
+	•	Flashy animations that reduce performance
+The dashboard should look excellent at full screen on my actual display and work reasonably well on smaller screens.
+3. Main feature: Central AI interface
+The visual centrepiece should be a large, attractive JARVIS-style AI orb or circular interface.
+I want something visually impressive but reasonably subtle.
+Ideally the orb should have distinct visual states:
+Idle
+	•	Soft, slowly pulsing blue/cyan light
+	•	Minimal animation
+	•	A small indication that JARVIS is ready
+Listening
+	•	Brighter blue glow
+	•	Reactive audio visualisation or waveform, if genuine microphone-level data can be obtained
+	•	Clear LISTENING label
+Processing
+	•	Subtle animated rings
+	•	PROCESSING label
+Speaking
+	•	Smooth, rhythmic visual activity
+	•	SPEAKING label
+Only display these states as live operational states if they can be obtained reliably from the existing Voice Satellite Card or Home Assistant pipeline.
+Investigate what events, entities or state interfaces the existing software exposes.
+Do not invent unsupported events or create fake status indicators that claim to represent the assistant&#x27;s actual activity.
+If full state integration is not possible, implement the best honest, functional alternative.
+The central interface should become the main visual attraction of the dashboard.
+4. Improve or hide the ugly Voice Satellite Card
+The existing Voice Satellite Card works, but I dislike its default appearance.
+Project: https://github.com/emme99/voice-satellite-card
+Please investigate its current configuration and styling capabilities.
+The project&#x27;s documented settings include:
+type: custom:voice-satellite-card
+wake_word: hey_jarvis
+mode: both
+style: fab
+The fab option is a supported compact floating-button style.
+My preference is to hide the original card&#x27;s bulky interface and use the new central JARVIS visual interface instead.
+However, maintaining reliable wake-word detection is much more important than achieving a completely hidden card.
+Follow this priority order:
+	1	Start by switching the card to its documented style: fab mode.
+	2	Confirm &quot;Hey Jarvis&quot; still activates the microphone and voice pipeline.
+	3	Investigate whether the compact button can be visually restyled to match the dashboard.
+	4	If safe, reduce the button&#x27;s visual prominence or incorporate it into the design.
+	5	If technically feasible, link the central orb to the real wake-word component&#x27;s status and controls.
+	6	Consider a custom wrapper or maintained local modification only if clearly necessary and safe.
+Critical requirements
+	•	Do not delete the Voice Satellite Card.
+	•	Do not remove it from the active dashboard if that stops wake-word detection.
+	•	Do not use CSS display: none or conditional rendering without proving that the component remains mounted and listening.
+	•	Do not assume that hiding a card visually preserves microphone processing.
+	•	Do not disable microphone permission requirements or browser security protections.
+	•	Do not modify the existing microphone, Whisper, Piper or Ollama services unnecessarily.
+	•	Do not create an inert orb that looks like a working microphone control but cannot actually operate it.
+If full visual integration is impractical, retain a small, tasteful and functional floating control.
+5. Dashboard layout
+Top header
+A premium-looking header displaying:
+J.A.R.V.I.S.
+Subtitle:
+&quot;Just A Rather Very Intelligent System&quot;
+Include an actual system-status indicator where supported, plus the current date and time.
+Keep the header elegant and not overly large.
+Central section
+The large animated AI orb should dominate the central area.
+Below it, show a short status such as:
+&quot;AWAITING COMMAND&quot;
+Or another accurate state derived from the existing system.
+Include a small line:
+&quot;Say &#x27;Hey Jarvis&#x27; to begin&quot;
+If technically practical, display the latest recognized question and response. Only use genuine pipeline or conversation data available through supported interfaces, and avoid storing sensitive speech transcripts unnecessarily.
+Left panel: Home systems
+Display compact real-time information from my existing Home Assistant entities.
+Examples:
+	•	Living-room lights
+	•	Bedroom lights
+	•	Office devices
+	•	House temperature
+	•	Thermostat
+	•	Important switches
+	•	Device availability
+Please inspect my actual Home Assistant entities and choose useful ones.
+Don&#x27;t guess entity IDs or invent devices.
+Use attractive, compact cards with genuinely functional controls.
+Right panel: System monitoring
+Show useful technical information where available:
+	•	AI host CPU usage
+	•	Mac memory usage
+	•	AI server status
+	•	Ollama connectivity
+	•	Home Assistant connectivity
+	•	Speech service availability
+Only use real sensors or verified service status.
+If the Mac currently has no monitoring integration, identify a safe, lightweight option and request approval before installing anything.
+Don&#x27;t show fictitious processing percentages or model activity.
+Bottom section: Quick commands
+Add a few large, attractive shortcut buttons:
+	•	Cinema Mode
+	•	All Lights Off
+	•	Goodnight
+	•	Living Room
+	•	Office
+Use actual existing Home Assistant scripts, scenes or entities.
+If an action does not exist, don&#x27;t invent its entity ID or silently create an automation that changes my devices. Ask before creating new scripts or scenes.
+6. Animation and performance
+My computer may have limited resources and may already be running AI workloads. Inspect actual capacity first.
+Keep the dashboard lightweight.
+Prefer:
+	•	Efficient CSS animations
+	•	GPU-friendly transforms and opacity changes
+	•	Native Home Assistant cards when suitable
+	•	Minimal JavaScript
+	•	Low CPU usage while idle
+	•	Smooth transitions rather than constant visual activity
+Avoid unnecessary high-frequency polling, excessive shadow effects, animated backgrounds or heavy rendering libraries.
+The dashboard should not significantly impact Ollama or Whisper performance.
+7. Technical implementation
+Start by inspecting my existing Home Assistant dashboard configuration and currently installed dashboard resources.
+Prefer built-in Home Assistant dashboard features where possible.
+Useful options to evaluate include:
+	•	Home Assistant Sections layout
+	•	Native Tile and Button cards
+	•	Existing installed custom cards
+	•	Mushroom cards, if already installed
+	•	Button Card for advanced visual elements
+	•	Card-mod for carefully scoped CSS styling
+	•	A lightweight custom Lovelace card for the AI orb if necessary
+Do not assume any custom card is installed.
+If an additional dependency is genuinely useful, verify its maintenance status and compatibility, then obtain my approval before installing it.
+If custom JavaScript or CSS is needed, place it in a clearly named, maintainable file within Home Assistant&#x27;s proper configuration directory.
+Do not modify third-party JavaScript files directly without first considering safer alternatives.
+Create a backup of the dashboard and record the existing resources before editing.
+8. Desktop and mobile experience
+The primary target is the actual display that will show this dashboard. Detect its resolution and dimensions.
+Design for:
+	•	Wide landscape layout
+	•	Full-screen browser display
+	•	Excellent readability when filming
+	•	A central, visually balanced AI interface
+	•	No unnecessary scrollbars
+On mobile:
+	•	Stack major sections vertically
+	•	Keep buttons comfortably tappable
+	•	Preserve readability
+	•	Avoid visual overlap
+The voice satellite only needs to operate on my chosen browser or voice device for this phase.
+Do not assume it will also work continuously on mobile browsers.
+9. Kiosk and filming presentation
+The dashboard will appear prominently in a YouTube video.
+Make it visually attractive when displayed full-screen on the actual display.
+If helpful, investigate a reversible kiosk-style presentation that hides unnecessary Home Assistant navigation while filming.
+Do not permanently remove access to dashboard editing, settings or navigation.
+The final interface should look like a dedicated JARVIS operating system rather than a normal Home Assistant administration page.
+10. Validation and testing
+After making changes:
+	1	Open the existing Jarvis dashboard.
+	2	Verify all cards render correctly.
+	3	Check for missing resources, broken entity references and JavaScript errors.
+	4	Confirm the interface looks good at the actual display resolution.
+	5	Confirm the Voice Satellite Card remains operational.
+	6	Enable listening through its supported control.
+	7	Test the phrase &quot;Hey Jarvis&quot;.
+	8	Confirm speech reaches Home Assistant Assist.
+	9	Confirm Ollama can respond.
+	10	Confirm Piper plays through the configured speakers.
+	11	Verify the new dashboard does not interfere with wake-word detection.
+	12	Confirm existing Home Assistant dashboards and device controls still function.
+For the final test, speak a command that actually operates a test light, with my approval.
+Do not claim microphone or voice functionality has been verified unless an actual test has succeeded.
+11. Final deliverable
+I want a finished, attractive, working dashboard in my existing Home Assistant installation.
+When complete, provide:
+	•	A concise summary of the design
+	•	A screenshot of the finished dashboard, if available
+	•	All new files and resources installed
+	•	The dashboard configuration or a backup/export
+	•	Any additional dependencies
+	•	How the Voice Satellite Card has been restyled or hidden
+	•	How to activate the microphone after restarting the computer
+	•	What is genuinely live and what is decorative
+	•	Known technical limitations
+	•	Instructions for safely reverting the changes
+The dashboard must remain easy to maintain.
+12. Important working instructions
+Use the computer tools available to carry out the work, not just explain the steps.
+Proceed without repeatedly asking for information already provided.
+Request approval before major configuration changes, new dependencies, or potentially disruptive actions.
+If local access, browser access or file permissions are unavailable, identify the exact blocker rather than claiming a successful installation.
+Prioritise a working voice assistant over appearance.
+The final result should be a beautiful, cinematic, genuinely functional JARVIS AI Command Centre on my existing Home Assistant dashboard, using the verified microphone, the available local AI services and &quot;Hey Jarvis&quot; wake word.
+</pre></section><p class="muted">Tip: have a Home Assistant backup ready. Never allow the prompt to assume another person's IP address, entity IDs, supported climate actions or installed AI tools.</p></article><footer class="foot">Independent DIY guide. Not affiliated with Home Assistant, Apple or Marvel. The filmed build used Piper Alan Medium (en_GB-alan-medium). Always verify current upstream instructions and your own setup.</footer></main></body></html>
