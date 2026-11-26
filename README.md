@@ -10,7 +10,7 @@ Free companion resources for the YouTube build: a local AI assistant using Home 
 
 ## Start here
 
-- **[Open the website](index.html)** (when published on GitHub Pages)
+- **[Open the website](https://tasteful-tech-official.github.io/jarvis-home-assistant/)**
 - **[Read the guide](START_HERE.md)**
 - **[Copy Mac setup commands](docs/COPY_PASTE_COMMANDS.md)**
 - **[Prompt 1: Build the JARVIS command centre](prompts/07-full-dashboard-build.txt)** — adapted from the creator's original prompt
