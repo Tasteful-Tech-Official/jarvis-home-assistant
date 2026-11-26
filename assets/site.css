@@ -141,6 +141,8 @@
 .architecture-flow li::marker { color: var(--cyan); font-weight: 750; }
 .architecture-flow strong { display: block; color: var(--text); }
 
+.doc a { overflow-wrap: anywhere; }
+
 .optional-prompt summary { padding: 3px 0; }
 .optional-prompt summary::marker { color: var(--cyan); }
 .optional-prompt summary span {
